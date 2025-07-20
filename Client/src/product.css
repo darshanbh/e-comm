@@ -1,0 +1,60 @@
+.prod {
+    border: 1.5px solid #ccc;
+    border-radius: 15px;
+    padding: 0;
+    margin: 15px;
+    height: 300px;
+    width: 230px;
+    margin-top: 20px;
+
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distributes image, content, and price bar */
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.prod:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #baf0f1;
+}
+
+.prod h6 {
+    font-size: 18px;
+    margin: 10px 0 4px;
+    padding: 0 10px;
+}
+
+.prod p {
+    font-size: 12px;
+    margin: 2px 0;
+    padding: 0 10px;
+}
+.price {
+    background-color: #57aeef;
+    height: 30px;
+    width: 100%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #444;
+}
+
+.new-price {
+    color: black;
+}
