@@ -53,3 +53,9 @@ body {
 .read-the-docs {
   color: #888;
 }
+
+
+/* footer */
+footer a:hover {
+  text-decoration: underline;
+}

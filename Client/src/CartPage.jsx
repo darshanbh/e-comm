@@ -19,20 +19,45 @@ function CartPage() {
       ) : (
         <>
           <ul className="list-group mb-3">
-            {cartItems.map((item, i) => (
-              <li key={i} className="list-group-item d-flex justify-content-between">
-                <span>{item.title}</span>
-                <span>₹{Number(item.price).toFixed(2)}</span>
-              </li>
-            ))}
-          </ul>
+  {cartItems.map((item, i) => (
+    <li
+      key={i}
+      className="list-group-item d-flex justify-content-between align-items-center"
+    >
+      <div className="d-flex align-items-center">
+        <img
+          style={{
+            width: "60px",
+            height: "60px",
+            objectFit: "cover",
+            borderRadius: "8px",
+            marginRight: "10px",
+            display: "block",
+          }}
+          src={`http://localhost:5000/uploads/${item.imageurl}`}
+          alt={item.title}
+          loading="lazy"
+          onError={(e) => {
+            if (e.target.src !== "https://via.placeholder.com/60") {
+              e.target.onerror = null;
+              e.target.src = "https://via.placeholder.com/60";
+            }
+          }}
+        />
+        <span className="ms-2">{item.title}</span>
+      </div>
+      <span>₹{Number(item.price).toFixed(2)}</span>
+    </li>
+  ))}
+</ul>
+
           <h4 className="text-white">Total: ₹{total.toFixed(2)}</h4>
-              <button
-                className="btn btn-success"
-                onClick={() => navigate('/checkout', { state: { total } })}
-              >
-                Buy Now
-              </button>
+          <button
+            className="btn btn-success"
+            onClick={() => navigate('/checkout', { state: { total } })}
+          >
+            Buy Now
+          </button>
         </>
       )}
     </div>

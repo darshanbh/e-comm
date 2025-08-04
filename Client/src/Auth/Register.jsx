@@ -1,40 +1,75 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import "../Register.css"
+import Button from '@mui/material/Button';
 
 function Register() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-
-    const res = await fetch('http://localhost:5000/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password: pass })
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      alert('Registration Successful');
-      navigate('/login');
-    } else {
-      alert(data.error || 'Registration failed');
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  return (
-    <div className="container mt-4">
-      <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <input className="form-control mb-2" type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} required />
-        <input className="form-control mb-2" type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-        <input className="form-control mb-2" type="password" placeholder="Password" value={pass} onChange={e => setPass(e.target.value)} required />
-        <button className="btn btn-success">Register</button>
-      </form>
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post('http://localhost:5000/api/auth/register', form); // use form here
+    alert(res.data.message);
+    // Optionally redirect to login
+    // navigate('/login');
+  } catch (err) {
+    alert(err.response?.data?.error || 'Registration failed');
+  }
+};
+
+   return (
+    <div className="register-container">
+      {/* Left Form Section */}
+      <div className="register-card">
+        <h2 className="register-title">Register</h2>
+        <form onSubmit={handleSubmit} className="register-form">
+          <label htmlFor="name">Name</label>
+          <input
+            name="name"
+            value={form.name}
+            placeholder="Enter your Name"
+            onChange={handleChange}
+            className="register-input"
+            required
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            name="email"
+            type="email"
+            value={form.email}
+            placeholder="Enter your Email"
+            onChange={handleChange}
+            className="register-input"
+            required
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            name="password"
+            type="password"
+            value={form.password}
+            placeholder="Password"
+            onChange={handleChange}
+            className="register-input"
+            required
+          />
+          <button className='register-btn' type="submit">
+            Register
+          </button>
+        </form>
+      </div>
+
+      {/* Right Image Section */}
+      <div className="register-image">
+        <img src="./src/images/register new.png" alt="Register Visual" />
+      </div>
     </div>
   );
 }

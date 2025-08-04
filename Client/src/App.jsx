@@ -35,37 +35,61 @@
 
 // export default App;
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavbarHome from './NavbarHome.jsx';
+import { Routes, Route } from 'react-router-dom';
+import NavbarHome from './Navbarhome.jsx';
 import ProductTab from './ProductTab.jsx';
 import CartPage from './CartPage.jsx';
 import Checkout from './Checkout.jsx';
-import Login from './Auth/Login.jsx';
+import Login from './Auth/login.jsx';
 import Register from './Auth/Register.jsx';
 import { CartProvider } from './CartContext.jsx';
+import { AuthProvider, useAuth } from './Auth/AuthContext.jsx'; // ✅
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import SideBar from './SideBar.jsx';
+import { Link } from "react-router-dom";
+import Home from './Home.jsx';
+import Footer from './footer.jsx';
+
+function AppRoutes() {
+  const { user } = useAuth();
+  const isLoggedIn = !!user;
+
+  return (
+    <>
+      <NavbarHome />
+      <div className="container mt-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductTab isLoggedIn={isLoggedIn} />} />
+
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+       <Footer />
+    </>
+  );
+}
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <NavbarHome />
-        <div className="container mt-4">
-          <Routes>
-            <Route path="/" element={<ProductTab />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        </div>
-      </Router>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <AppRoutes />
+        <SideBar />
+      </CartProvider>
+    </AuthProvider>
   );
 }
 
 export default App;
+
+
+
+
 
 
 

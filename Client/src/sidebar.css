@@ -1,0 +1,112 @@
+/* Sidebar base style */
+.sidebar_menu {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background: #4a4e69;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.4s ease;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Slide in when open */
+.sidebar_menu.open {
+  left: 0;
+}
+
+/* Close button */
+.btn_two {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+/* Logo */
+.logo {
+  padding: 30px 0 20px 30px;
+}
+
+.logo a {
+  color: #f2e9e4;
+  font-size: 2rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Menu */
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li {
+  padding: 18px 30px;
+  display: flex;
+  align-items: center;
+}
+
+.menu ul li i {
+  margin-right: 18px;
+  font-size: 1.2rem;
+  color: #f2e9e4;
+}
+
+.menu ul li a {
+  color: #f2e9e4;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+/* Social media */
+.social_media {
+  padding: 30px 0 30px 30px;
+}
+
+.social_media ul {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.social_media a {
+  color: #f2e9e4;
+  font-size: 1.5rem;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hidden initially */
+  width: 250px;
+  height: 100vh;
+  background: #111;
+  transition: left 0.3s ease;
+  z-index: 999;
+  padding: 20px;
+}
+
+.sidebar.open {
+  left: 0; /* Slide in */
+}
+
+.btn_one, .btn_two {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+}
+
+.btn_two {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

@@ -1,49 +1,90 @@
-import React from 'react';
+// import React from 'react';
+// import { useNavigate } from 'react-router-dom';
+// // import './producttab.css'; // import CSS for hover
+// import './product.css';
+
+// function Product({ product, addToCart, isLoggedIn }) {
+//   const navigate = useNavigate();
+
+//   const handleAddToCart = () => {
+//     if (!isLoggedIn) {
+//       alert("Please log in to add items to cart.");
+//       navigate('/login');
+//       return;
+//     }
+//     addToCart(product);
+//   };
+
+//   return (
+//     <div className="prod">
+//       <img
+//         src={`http://localhost:5000/uploads/${product.imageurl}`}
+//         alt={product.title}
+//         className="product-image"
+//         loading="lazy"
+//         onError={(e) => {
+//           if (e.target.src !== 'https://via.placeholder.com/200') {
+//             e.target.onerror = null;
+//             e.target.src = 'https://via.placeholder.com/200';
+//           }
+//         }}
+//       />
+//       <div className="product-body">
+//         <div>
+//           <h6 className="product-title">{product.title}</h6>
+//           <p className="product-price">₹{product.price}</p>
+//         </div>
+//         <button className="add-btn" onClick={handleAddToCart}>
+//           Add to Cart
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Product;
+
+ import React from 'react';
+import { useNavigate } from 'react-router-dom';
+// import './producttab.css'; // import CSS for hover
 import './product.css';
+import HoverRating from './HoverRating';
 
-let btnstyles = {
-    border:'none',
-    borderRadius:'5px',
-    width:'80px',
-    backgroundColor:"#eef745ff",
-    marginRight: "-5px",
-    alignItems: "center",
+function Product({ product, addToCart, isLoggedIn }) {
+  const navigate = useNavigate();
 
-}
-let styles = {
-    backgroundColor: "#46bbe2ff",
-    height: "30px",
-    width: "260px", // Make it match the container's width
-    borderBottomLeftRadius: "15px",
-    borderBottomRightRadius: "15px",
-    marginTop: "auto", // Push it to the bottom inside flex column
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "10px",
-    fontSize: "16px",
-    fontWeight: "bold",
-    marginLeft: "-15px",
-};
+  const handleAddToCart = () => {
+    if (!isLoggedIn) {
+      alert("Please log in to add items to cart.");
+      navigate('/login');
+      return;
+    }
+    addToCart(product);
+  };
 
-function Product({ product, addToCart }) {
   return (
     <div className="prod">
       <img
         src={`http://localhost:5000/uploads/${product.imageurl}`}
         alt={product.title}
-        className="card-img-top"
+        className="product-image"
         loading="lazy"
         onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = 'https://via.placeholder.com/200';
+          if (e.target.src !== 'https://via.placeholder.com/200') {
+            e.target.onerror = null;
+            e.target.src = 'https://via.placeholder.com/200';
+          }
         }}
-        style={{ height: '200px', objectFit: 'cover' }}
       />
-      <div className="card-body" >
-        <h6 className="">{product.title}</h6>
-        <p className="card-text">₹{product.price}</p>
-        <button className="btn btn-warning" onClick={() => addToCart(product)} >Add to Cart</button>
+      <div className="product-body">
+        {/* <HoverRating /> */}
+        <div>
+          <h6 className="product-title">{product.title}</h6>
+          <p className="product-price">₹{product.price}</p>
+        </div>
+        <button className="add-btn" onClick={handleAddToCart}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );

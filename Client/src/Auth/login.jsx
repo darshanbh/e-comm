@@ -1,61 +1,134 @@
-import React, { useState } from 'react';
+// import { useState } from 'react';
+// import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
+// import { useAuth } from './AuthContext';
+
+// export default function Login() {
+//   const [form, setForm] = useState({ email: '', password: '' });
+//   const navigate = useNavigate();
+//   const { login } = useAuth();
+
+//   const handleChange = (e) => {
+//     setForm({ ...form, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const res = await axios.post('http://localhost:5000/api/auth/login', form);
+
+//       // ✅ Use context to set login state
+//       login(res.data.token, res.data.user.username);
+
+//       alert('Login successful');
+//       navigate('/');
+//     } catch (err) {
+//       alert(err.response?.data?.error || 'Login failed');
+//     }
+//   };
+
+//   return (
+//     <div className="container mt-5">
+//       <h2>Login</h2>
+//       <form onSubmit={handleSubmit}>
+//         <input
+//           name="email"
+//           type="email"
+//           value={form.email}
+//           onChange={handleChange}
+//           placeholder="Email"
+//           className="form-control mb-3"
+//           required
+//         />
+//         <input
+//           name="password"
+//           type="password"
+//           value={form.password}
+//           onChange={handleChange}
+//           placeholder="Password"
+//           className="form-control mb-3"
+//           required
+//         />
+//         <button type="submit" className="btn btn-primary">Login</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+import { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
+import Button from '@mui/material/Button';
+import "../Login.css";
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+export default function Login() {
+  const [form, setForm] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleLogin = async (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Submitting login form", form);
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password: pass }),
-      });
+      const res = await axios.post('http://localhost:5000/api/auth/login', form);
+      const { token, user } = res.data;
 
-      const data = await res.json();
-
-      if (res.ok) {
-        alert('Login Successful');
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        navigate('/'); // Home page
-      } else {
-        alert(data.error || 'Invalid credentials');
-      }
-    } catch (error) {
-      alert('Server error. Try again later.');
-      console.error(error);
+      login(token, user);
+      alert('Login successful');
+      navigate('/');
+    } catch (err) {
+      console.error("Login error:", err);
+      alert(err.response?.data?.error || 'Login failed');
     }
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          className="form-control mb-2"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          className="form-control mb-2"
-          type="password"
-          placeholder="Password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          required
-        />
-        <button className="btn btn-primary">Login</button>
-      </form>
+    <div className="login-container">
+      <div className="login-card">
+        <h3 className="login-title">Login</h3>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label">Email</label>
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              className="form-input"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Password</label>
+            <input
+              name="password"
+              type="password"
+              value={form.password}
+              onChange={handleChange}
+              className="form-input"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <Button variant="contained" type="submit">
+            Login
+          </Button>        </form>
+        <p className="login-footer">
+          Don't have an account? <a href="/register">Register</a>
+        </p>
+      </div>
+      {/* Image container */}
+      <div className="login-image">
+        <img src="./src/images/login_new-removebg-preview.png" alt="Login Visual" />
+      </div>
     </div>
   );
 }
-
-export default Login;
