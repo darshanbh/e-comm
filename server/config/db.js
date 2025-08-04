@@ -12,6 +12,8 @@
 
 // db.js
 // config/db.js
+
+
 const mysql = require('mysql2/promise');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -27,3 +29,19 @@ const pool = mysql.createPool({
 });
 
 module.exports = pool;
+
+// config/db.js
+// const { Sequelize } = require('sequelize');
+
+// const sequelize = new Sequelize(
+//   process.env.DB_NAME,
+//   process.env.DB_USER,
+//   process.env.DB_PASSWORD,
+//   {
+//     host: process.env.DB_HOST,
+//     dialect: 'mysql',
+//     port: process.env.DB_PORT,
+//   }
+// );
+
+// module.exports = sequelize;

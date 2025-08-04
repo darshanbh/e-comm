@@ -76,7 +76,8 @@ export default function Login() {
     console.log("Submitting login form", form);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', form);
+      const res = await axios.post( `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
+  form);
       const { token, user } = res.data;
 
       login(token, user);

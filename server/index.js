@@ -3,30 +3,44 @@ const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 
-const app = express(); // ✅ Correct: initialize before using app.use()
+const app = express();
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
 
-// ✅ Serve static files from "uploads" folder
+// Static folder for uploads (if any images or files)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Routes
+// Import routes
 const authRoutes = require('./routes/auth');
-app.use('/api/auth', authRoutes);
-
 const productRoutes = require('./routes/productRoutes');
-app.use('/api', productRoutes);
 
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+// Use API routes
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Backend running at http://localhost:${PORT}`);
 });
+
+
+
+
+// config/db.js
+// const { Sequelize } = require('sequelize');
+
+// const sequelize = new Sequelize(
+//   process.env.DB_NAME,
+//   process.env.DB_USER,
+//   process.env.DB_PASSWORD,
+//   {
+//     host: process.env.DB_HOST,
+//     dialect: 'mysql',
+//     port: process.env.DB_PORT,
+//   }
+// );
+
+// module.exports = sequelize;
