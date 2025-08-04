@@ -6,7 +6,11 @@ require('dotenv').config();
 const app = express();
 
 // Middlewares
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: "https://e-commerce-prime.netlify.app",  // replace with actual Netlify URL
+  methods: ["GET", "POST"],
+}));
 app.use(express.json());
 
 // Static folder for uploads (if any images or files)
