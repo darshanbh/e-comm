@@ -69,7 +69,7 @@ function Register() {
 
       {/* Right Image Section */}
       <div className="register-image">
-        <img src="./src/images/register new.png" alt="Register Visual" />
+        <img src="/images/register new.png" alt="Register Visual" />
       </div>
     </div>
   );

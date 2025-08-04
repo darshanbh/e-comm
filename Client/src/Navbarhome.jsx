@@ -129,7 +129,7 @@ function NavbarHome() {
         <div className="container">
           <Link className="navbar-brand" to="/">
             <img
-              src="/new logo.png"
+              src="/images/new logo.png"
               alt="PrimeElectro"
               style={{
                 height: '50px',

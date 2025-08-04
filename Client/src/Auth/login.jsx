@@ -128,7 +128,7 @@ export default function Login() {
       </div>
       {/* Image container */}
       <div className="login-image">
-        <img src="./src/images/login_new-removebg-preview.png" alt="Login Visual" />
+        <img src="/images/login_new-removebg-preview.png" alt="Login Visual" />
       </div>
     </div>
   );

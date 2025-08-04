@@ -70,7 +70,7 @@ button:focus-visible {
 /* Global body font */
 /* Roboto - Regular (400), Bold (700) */
 
-hhtml {
+html {
   scroll-behavior: auto;
 }
 
