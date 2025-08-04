@@ -19,12 +19,7 @@ export default function Home() {
   {/* ✅ Hero Section */}
   <section
     className="hero text-white d-flex align-items-center justify-content-center text-center"
-    style={{
-      backgroundImage: 'url(/images/hero-banner.jpg)',
-      height: '80vh',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}
+    
   >
     <div>
       <h1 className="display-4 fw-bold">Welcome to PrimeElectro</h1>
@@ -59,7 +54,7 @@ export default function Home() {
       >
         <CardMedia
           sx={{ height: 140 }}
-          image="./src/images/headphonepremium.jpg"
+          image="/images/headphonepremium.jpg"
           title="green iguana"
         />
         <CardContent sx={{ backgroundColor: '#f4eb3aff' }}>
@@ -89,7 +84,7 @@ export default function Home() {
       >
         <CardMedia
           sx={{ height: 140 }}
-          image="./src/images/smartwatch.jpg"
+          image="/images/smartwatch.jpg"
           title="green iguana"
         />
         <CardContent sx={{ backgroundColor: '#eac23dff' }}>
