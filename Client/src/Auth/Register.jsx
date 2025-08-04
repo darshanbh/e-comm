@@ -16,8 +16,10 @@ function Register() {
   const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const res = await axios.post( `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
-  form); // use form here
+    const res = await axios.post(
+  `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
+  form
+); // use form here
     alert(res.data.message);
     // Optionally redirect to login
     // navigate('/login');

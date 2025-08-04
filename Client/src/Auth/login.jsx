@@ -1,59 +1,3 @@
-// import { useState } from 'react';
-// import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
-// import { useAuth } from './AuthContext';
-
-// export default function Login() {
-//   const [form, setForm] = useState({ email: '', password: '' });
-//   const navigate = useNavigate();
-//   const { login } = useAuth();
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const res = await axios.post('http://localhost:5000/api/auth/login', form);
-
-//       // ✅ Use context to set login state
-//       login(res.data.token, res.data.user.username);
-
-//       alert('Login successful');
-//       navigate('/');
-//     } catch (err) {
-//       alert(err.response?.data?.error || 'Login failed');
-//     }
-//   };
-
-//   return (
-//     <div className="container mt-5">
-//       <h2>Login</h2>
-//       <form onSubmit={handleSubmit}>
-//         <input
-//           name="email"
-//           type="email"
-//           value={form.email}
-//           onChange={handleChange}
-//           placeholder="Email"
-//           className="form-control mb-3"
-//           required
-//         />
-//         <input
-//           name="password"
-//           type="password"
-//           value={form.password}
-//           onChange={handleChange}
-//           placeholder="Password"
-//           className="form-control mb-3"
-//           required
-//         />
-//         <button type="submit" className="btn btn-primary">Login</button>
-//       </form>
-//     </div>
-//   );
-// }
 
 import { useState } from 'react';
 import axios from 'axios';
@@ -68,6 +12,7 @@ export default function Login() {
   const { login } = useAuth();
 
   const handleChange = (e) => {
+     console.log("API BASE URL:", import.meta.env.VITE_API_BASE_URL); 
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -76,8 +21,10 @@ export default function Login() {
     console.log("Submitting login form", form);
 
     try {
-      const res = await axios.post( `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
-  form);
+      const res = await axios.post(
+  `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
+  form
+);
       const { token, user } = res.data;
 
       login(token, user);
