@@ -17,7 +17,7 @@ function Register() {
   e.preventDefault();
   try {
     const res = await axios.post(
-  `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
+  `${import.meta.env.VITE_API_BASE_URL}/auth/register`,
   form
 ); // use form here
     alert(res.data.message);
