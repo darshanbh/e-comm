@@ -51,5 +51,5 @@ A full-stack e-commerce web application developed as part of an internship proje
 ## 📥 Clone This Project
 
 ```bash
-git clone https://github.com/your-username/e-commerce-prime.git
+git clone[ https://github.com/your-username/e-commerce-prime.git](https://github.com/darshanbh/e-comm.git)
 cd e-commerce-prime
