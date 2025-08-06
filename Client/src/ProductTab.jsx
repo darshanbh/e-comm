@@ -4,12 +4,14 @@ import Product from './Product';
 import { useCart } from './CartContext.jsx';
 import './producttab.css'; // ✅ Fixed import
 
+import api from '../api'; // this is important
+
 function ProductTab({ isLoggedIn }) {
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/products')
+    api.get('/products') // ✅ use relative path here
       .then(res => setProducts(res.data))
       .catch(err => console.error("Error fetching products:", err));
   }, []);
