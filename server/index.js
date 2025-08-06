@@ -12,7 +12,6 @@ const app = express();
 //   methods: ["GET", "POST"],
 // }));
 // app.use(express.json());
-const cors = require('cors');
 
 app.use(cors({
   origin: "https://e-commerce-prime.netlify.app",  // ✅ your deployed frontend
