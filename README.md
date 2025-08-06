@@ -48,3 +48,8 @@ A full-stack e-commerce web application developed as part of an internship proje
 ## 🗂️ Project Structure
 
 
+## 📥 Clone This Project
+
+```bash
+git clone https://github.com/your-username/e-commerce-prime.git
+cd e-commerce-prime
