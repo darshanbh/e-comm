@@ -65,7 +65,7 @@ function Product({ product, addToCart, isLoggedIn }) {
   return (
     <div className="prod">
       <img
-        src={`http://localhost:5000/uploads/${product.imageurl}`}
+        src={`https://primeelectro.onrender.com/images/${encodeURIComponent(product.imageurl)}`}
         alt={product.title}
         className="product-image"
         loading="lazy"
