@@ -44,8 +44,26 @@ A full-stack e-commerce web application developed as part of an internship proje
 - Secure and optimized API routes
 
 ---
+## 📸 Project Screenshots
 
-## 🗂️ Project Structure
+### 🏠 Homepage
+![Homepage](Working%20project%20screenshots/Screenshot%20(68).png)
+
+### 🛒 Product Page
+![Products](Working%20project%20screenshots/Screenshot%20(69).png)
+
+### 🧾 Checkout
+![Checkout](Working%20project%20screenshots/Screenshot%20(74).png)
+
+### 🔐 Login Page
+![Login](Working%20project%20screenshots/Screenshot%20(72).png)
+
+### 📦 Orders Page
+![Orders](Working%20project%20screenshots/Screenshot%20(75).png)
+
+### 📄 Invoice
+![Invoice](Working%20project%20screenshots/Screenshot%20(76).png)
+
 
 
 ## 📥 Clone This Project
