@@ -7,11 +7,21 @@ const app = express();
 
 // Middlewares
 // app.use(cors());
+// app.use(cors({
+//   origin: "https://e-commerce-prime.netlify.app",  // replace with actual Netlify URL
+//   methods: ["GET", "POST"],
+// }));
+// app.use(express.json());
+const cors = require('cors');
+
 app.use(cors({
-  origin: "https://e-commerce-prime.netlify.app",  // replace with actual Netlify URL
-  methods: ["GET", "POST"],
+  origin: "https://e-commerce-prime.netlify.app",  // ✅ your deployed frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],       // ✅ include all methods you use
+  credentials: true                                 // ✅ only if using cookies/session
 }));
+
 app.use(express.json());
+
 
 // Static folder for uploads (if any images or files)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
