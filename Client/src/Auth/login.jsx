@@ -70,7 +70,7 @@ export default function Login() {
             Login
           </Button>        </form>
         <p className="login-footer">
-          Don't have an account? <a href="/register">Register</a>
+          Don't have an account click here? <a href="/register">Register</a>
         </p>
       </div>
       {/* Image container */}
