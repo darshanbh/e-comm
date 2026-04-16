@@ -136,3 +136,19 @@ p, span {
 
 
 
+/* Footer Styles */
+.custom-footer {
+  background-color: #010409;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-link {
+  color: #8b949e;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.footer-link:hover {
+  color: #ffc107;
+  transform: translateX(5px); /* Slide arrow effect */
+}

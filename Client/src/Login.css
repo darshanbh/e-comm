@@ -1,21 +1,17 @@
 .login-container {
+  min-height: 80vh;
   display: flex;
-  height: 80vh;
-  /* background-color: #f8f9fa; */
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-card {
-  background-color: #5dccda;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 400px;
   padding: 30px;
-  border-radius: 10px 0 0 10px;
-  width: 40%;
-  max-width: 400px;
+  border-radius: 12px;
+  background: #8cc3cc;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
-
 .login-image {
   flex: 1;
   /* background-color: #f1f1f1; */

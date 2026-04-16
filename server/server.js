@@ -1,32 +1,41 @@
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql2');
 const path = require('path');
+
+require('dotenv').config();
 
 const app = express();
 const PORT = 5000;
 
-app.use(cors());
+// ✅ FIXED CORS (ONLY ONCE)
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://e-commerce-prime.netlify.app",
+    "https://your-vercel-app.vercel.app" // future
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
+// DB
+const db = require('./config/db');
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log('Connected to MySQL DB');
-});
+// Routes
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
 
-app.get('/api/products', (req, res) => {
-  db.query('SELECT * FROM products', (err, results) => {
-    if (err) return res.status(500).json({ error: 'Failed to fetch products' });
+// Products API
+app.get('/api/products', async (req, res) => {
+  try {
+    const [results] = await db.query('SELECT * FROM products');
     res.json(results);
-  });
+  } catch (err) {
+    console.error("❌ DB ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 app.listen(PORT, () => {

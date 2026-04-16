@@ -8,15 +8,17 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Full user object
 
   // Load user and token from localStorage on initial load
-  useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
+useEffect(() => {
+  const savedUser = localStorage.getItem('user');
 
-    if (savedUser && token) {
+  if (savedUser && savedUser !== "undefined") {
+    try {
       setUser(JSON.parse(savedUser));
+    } catch {
+      localStorage.removeItem("user");
     }
-  }, []);
-
+  }
+}, []);
   // ✅ Fixed login function
   const login = (token, user) => {
     localStorage.setItem('token', token);

@@ -94,7 +94,6 @@
 // }
 
 // export default NavbarHome;
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "./CartContext.jsx";
@@ -115,57 +114,53 @@ function NavbarHome() {
   };
 
   return (
-
     <div className="main_box">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg custom-navbar">
 
         {/* Hamburger Button */}
-        <div className="btn_one" onClick={() => setSidebarOpen(true)}>
+        <div className="btn_one ms-3" onClick={() => setSidebarOpen(true)}>
           <i className="fa-solid fa-bars"></i>
         </div>
 
         {/* Sidebar with animation */}
         <SideBar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <img
-              src="/images/new logo.png"
-              alt="PrimeElectro"
-              style={{
-                height: '50px',
-                width: 'auto',
-                objectFit: 'contain'
-              }}
-            />
+            PrimeElectro
           </Link>
 
           <div className="collapse navbar-collapse justify-content-end">
             <ul className="navbar-nav align-items-center">
               <li className="nav-item mx-2">
                 <Link className="nav-link" to="/cart">
-                  <ShoppingCartCheckoutOutlinedIcon style={{ verticalAlign: 'middle' }} />
+                  <ShoppingCartCheckoutOutlinedIcon style={{ verticalAlign: 'middle', marginRight: '4px' }} />
                   Cart
                   {cartItems.length > 0 && (
-                    <span className="badge bg-danger ms-1">{cartItems.length}</span>
+                    <span className="badge ms-1">{cartItems.length}</span>
                   )}
                 </Link>
               </li>
+              
               {user ? (
                 <>
-                  <li className="nav-item mx-2 text-white">
-                    👋 Welcome, <strong>{user.name}</strong>
+                  <li className="nav-item mx-2">
+                    {/* Wrapped the text in the new styling pill */}
+                    <span className="user-greeting">
+                      👋 Welcome, <strong>{user.name}</strong>
+                    </span>
                   </li>
                   <li className="nav-item mx-2">
-                    <button onClick={handleLogout} className="btn btn-warning">Logout</button>
+                    <button onClick={handleLogout} className="nav-action-btn">Logout</button>
                   </li>
                 </>
               ) : (
                 <>
-                  <li className="nav-item mx-2">
-                    <Link to="/login" className="btn btn-outline-light">Login</Link>
+                  <li className="nav-item">
+                    <Link to="/login" className="nav-glass-btn">Login</Link>
                   </li>
-                  <li className="nav-item mx-2">
-                    <Link to="/register" className="btn btn-outline-light">Register</Link>
+                  <li className="nav-item">
+                    <Link to="/register" className="nav-action-btn ms-2">Register</Link>
                   </li>
                 </>
               )}
@@ -173,9 +168,8 @@ function NavbarHome() {
           </div>
         </div>
       </nav>
-    </div >
+    </div>
   );
 }
 
 export default NavbarHome;
-

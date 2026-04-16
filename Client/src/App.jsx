@@ -34,6 +34,7 @@
 // }
 
 // export default App;
+
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import NavbarHome from './Navbarhome.jsx';
@@ -50,6 +51,7 @@ import SideBar from './SideBar.jsx';
 import { Link } from "react-router-dom";
 import Home from './Home.jsx';
 import Footer from './footer.jsx';
+import ForgotPassword from './Auth/ForgotPassword';
 
 function AppRoutes() {
   const { user } = useAuth();
@@ -58,8 +60,11 @@ function AppRoutes() {
   return (
     <>
       <NavbarHome />
-      <div className="container mt-4">
+      <div className="mt-4">
         <Routes>
+
+
+         <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductTab isLoggedIn={isLoggedIn} />} />
 
@@ -69,7 +74,7 @@ function AppRoutes() {
           <Route path="/register" element={<Register />} />
         </Routes>
       </div>
-       <Footer />
+      <Footer />
     </>
   );
 }

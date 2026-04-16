@@ -43,12 +43,9 @@
 // }
 
 // export default Product;
-
- import React from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-// import './producttab.css'; // import CSS for hover
 import './product.css';
-import HoverRating from './HoverRating';
 
 function Product({ product, addToCart, isLoggedIn }) {
   const navigate = useNavigate();
@@ -65,23 +62,26 @@ function Product({ product, addToCart, isLoggedIn }) {
   return (
     <div className="prod">
       <img
-        src={`https://primeelectro.onrender.com/uploads/${encodeURIComponent(product.imageurl)}`}
-        alt={product.title}
+        src={
+          product.imageurl
+            ? `http://localhost:5000/uploads/${product.imageurl}`
+            : "https://via.placeholder.com/200"
+        }
+        alt={product.name}
         className="product-image"
         loading="lazy"
         onError={(e) => {
-          if (e.target.src !== 'https://via.placeholder.com/200') {
-            e.target.onerror = null;
-            e.target.src = 'https://via.placeholder.com/200';
-          }
+          e.target.onerror = null; // stop infinite loop
+          e.target.src = "https://via.placeholder.com/200";
         }}
       />
+
       <div className="product-body">
-        {/* <HoverRating /> */}
         <div>
-          <h6 className="product-title">{product.title}</h6>
+          <h6 className="product-title">{product.name}</h6>
           <p className="product-price">₹{product.price}</p>
         </div>
+
         <button className="add-btn" onClick={handleAddToCart}>
           Add to Cart
         </button>

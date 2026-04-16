@@ -1,22 +1,29 @@
+/* Global Reset & Base Theme */
 body {
-  background-image: url('/images/23964.jpg');
-  background-size: cover;       /* Ensures image covers full screen */
-  background-repeat: no-repeat;
-  background-position: center;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Lexend Deca', 'Roboto', sans-serif;
+  background-color: #0d1117; /* Sleek dark tech background */
+  color: #e6edf3; /* Soft white text */
+  overflow-x: hidden;
+}
+body, html, #root {
+  background-color: #0d1117 !important;
+  margin: 0;
+  padding: 0;
   min-height: 100vh;
 }
 
-
 #root {
-  max-width: 1280px;
+  /* Removed max-width: 1280px and padding so Hero/Navbar can be full width */
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-.app-container {
-  padding-top: 70px; /* So navbar doesn't cover content */
+  text-align: left;
 }
 
+.app-container {
+  padding-top: 70px; /* Space for the sticky navbar */
+}
 
 .logo {
   height: 6em;

@@ -1,70 +1,73 @@
-
-
-
-
-// ✅ REGISTER ROUTE WITH HASHING
-// routes/auth.js or wherever your login endpoint is
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
 const db = require('../config/db');
 
-// POST /api/auth/register
+// ================= REGISTER =================
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
-  if (!name || !email || !password)
+
+  if (!name || !email || !password) {
     return res.status(400).json({ error: 'All fields are required' });
+  }
 
   try {
-    console.log('Checking for existing user...');
-    const [existing] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-    console.log('Existing user check complete.');
+    const [existing] = await db.query(
+      'SELECT * FROM users WHERE email = ?',
+      [email.trim()]
+    );
 
-    if (existing.length > 0)
+    if (existing.length > 0) {
       return res.status(400).json({ error: 'Email already registered' });
+    }
 
-    console.log('Hashing password...');
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log('Password hashed.');
+    const hashedPassword = await bcrypt.hash(password.trim(), 10);
 
     await db.query(
       'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-      [name, email, hashedPassword]
+      [name.trim(), email.trim(), hashedPassword]
     );
-    console.log('User inserted.');
 
     res.json({ message: 'User registered successfully' });
+
   } catch (err) {
-    console.error('Registration error:', err);
-    res.status(500).json({ error: 'Registration failed' });
+    console.error('❌ Register Error:', err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-// ...register route here...
 
-// POST /api/auth/login
+// ================= LOGIN =================
+// ================= LOGIN =================
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
 
-  if (!email || !password)
-    return res.status(400).json({ error: 'All fields are required' });
+  email = email.trim();
+  password = password.trim();
 
   try {
-    const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-    if (rows.length === 0)
-      return res.status(401).json({ error: 'Invalid email or password' });
+    const [rows] = await db.query(
+      'SELECT * FROM users WHERE email = ?',
+      [email]
+    );
+
+    if (rows.length === 0) {
+      return res.status(401).json({ error: 'User not found' });
+    }
 
     const user = rows[0];
-    const match = await bcrypt.compare(password, user.password);
-    if (!match)
-      return res.status(401).json({ error: 'Invalid email or password' });
 
-    // Generate JWT token
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return res.status(401).json({ error: 'Wrong password' });
+    }
+
+    // ✅ FIX STARTS HERE
     const token = jwt.sign(
       { id: user.id, email: user.email },
-      process.env.JWT_SECRET || 'your_jwt_secret',
+      process.env.JWT_SECRET || 'secret',
       { expiresIn: '1d' }
     );
 
@@ -72,13 +75,46 @@ router.post('/login', async (req, res) => {
       token,
       user: {
         id: user.id,
-        name: user.name, 
+        name: user.name,
         email: user.email
       }
     });
+    // ✅ FIX ENDS HERE
+
   } catch (err) {
-    console.error('Login error:', err);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: err.message });
+  }
+});
+// ================= FORGOT PASSWORD =================
+router.post('/forgot-password', async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  if (!email || !newPassword) {
+    return res.status(400).json({ error: "Email and new password required" });
+  }
+
+  try {
+    const [rows] = await db.query(
+      'SELECT * FROM users WHERE email = ?',
+      [email.trim()]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword.trim(), 10);
+
+    await db.query(
+      'UPDATE users SET password = ? WHERE email = ?',
+      [hashedPassword, email.trim()]
+    );
+
+    res.json({ message: "Password updated successfully" });
+
+  } catch (err) {
+    console.error("❌ Forgot Password Error:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 

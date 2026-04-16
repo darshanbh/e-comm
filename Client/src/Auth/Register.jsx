@@ -1,77 +1,88 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import "../Register.css"
-import Button from '@mui/material/Button';
+import { useNavigate, Link } from 'react-router-dom';
+import "../Auth.css";
 
 function Register() {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
   e.preventDefault();
+  setLoading(true);
+
   try {
     const res = await axios.post(
-  `${import.meta.env.VITE_API_BASE_URL}/auth/register`,
-  form
-); // use form here
+      "http://localhost:5000/api/auth/register", // ✅ FIXED
+      {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        password: form.password.trim()
+      }
+    );
+
     alert(res.data.message);
-    // Optionally redirect to login
-    // navigate('/login');
+    navigate('/login');
+
   } catch (err) {
-    alert(err.response?.data?.error || 'Registration failed');
+    console.log("❌ REGISTER ERROR:", err.response || err);
+
+    alert(
+      err.response?.data?.error ||
+      err.message ||
+      'Registration failed'
+    );
   }
+
+  setLoading(false);
 };
 
-   return (
-    <div className="register-container">
-      {/* Left Form Section */}
-      <div className="register-card">
-        <h2 className="register-title">Register</h2>
-        <form onSubmit={handleSubmit} className="register-form">
-          <label htmlFor="name">Name</label>
+  return (
+    <div className="auth-container">
+      <div className="auth-card">
+        <h3 className="auth-title">Register</h3>
+
+        <form className="auth-form" onSubmit={handleSubmit}>
           <input
+            className="auth-input"
             name="name"
             value={form.name}
-            placeholder="Enter your Name"
             onChange={handleChange}
-            className="register-input"
+            placeholder="Name"
             required
           />
-          <label htmlFor="email">Email</label>
           <input
+            className="auth-input"
             name="email"
             type="email"
             value={form.email}
-            placeholder="Enter your Email"
             onChange={handleChange}
-            className="register-input"
+            placeholder="Email"
             required
           />
-          <label htmlFor="password">Password</label>
           <input
+            className="auth-input"
             name="password"
             type="password"
             value={form.password}
-            placeholder="Password"
             onChange={handleChange}
-            className="register-input"
+            placeholder="Password"
             required
           />
-          <button className='register-btn' type="submit">
-            Register
+
+          <button className="auth-btn" type="submit" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
-      </div>
 
-      {/* Right Image Section */}
-      <div className="register-image">
-        <img src="/images/register new.png" alt="Register Visual" />
+        <p className="auth-footer">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
       </div>
     </div>
   );
