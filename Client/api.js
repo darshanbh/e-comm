@@ -11,8 +11,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  //baseURL: 'https://primeelectro.onrender.com/api', // ✅ correct backend base URL
-    baseURL: "http://localhost:5000/api"
+  baseURL: 'https://primeelectro.onrender.com/api', // ✅ correct backend base URL
+    // baseURL: "http://localhost:5000/api"
 
 });
 

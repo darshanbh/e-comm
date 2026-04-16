@@ -63,10 +63,10 @@ function Product({ product, addToCart, isLoggedIn }) {
     <div className="prod">
       <img
         src={
-          product.imageurl
-            ? `http://localhost:5000/uploads/${product.imageurl}`
-            : "https://via.placeholder.com/200"
-        }
+    product.imageurl
+      ? `${import.meta.env.VITE_API_BASE_URL.replace('/api','')}/uploads/${product.imageurl}`
+      : "https://via.placeholder.com/200"
+  }
         alt={product.name}
         className="product-image"
         loading="lazy"
