@@ -11,6 +11,7 @@
     "proxy": "http://localhost:5000"
   },
   "dependencies": {
+    "framer-motion": "^10.x.x",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.6",
