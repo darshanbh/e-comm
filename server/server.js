@@ -10,13 +10,10 @@ const PORT = 5000;
 // ✅ FIXED CORS (ONLY ONCE)
 app.use(cors({
   origin: [
-    "http://localhost:5173",
-    "https://e-commerce-prime.netlify.app",
-    "https://your-vercel-app.vercel.app" // future
+    "https://e-commerce-prime.netlify.app/"
   ],
   credentials: true
 }));
-
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

@@ -19,12 +19,12 @@ const handleSubmit = async (e) => {
 
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/auth/login",
-      {
-        email: form.email.trim(),
-        password: form.password.trim()
-      }
-    );
+  `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
+  {
+    email: form.email.trim(),
+    password: form.password.trim()
+  }
+);
 
     const { token, user } = res.data;
 
