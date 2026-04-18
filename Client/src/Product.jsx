@@ -63,22 +63,23 @@ function Product({ product, addToCart, isLoggedIn }) {
     <div className="prod">
       <img
         src={
-    product.imageurl
-      ? `${import.meta.env.VITE_API_BASE_URL.replace('/api','')}/uploads/${product.imageurl}`
-      : "https://via.placeholder.com/200"
-  }
-        alt={product.name}
+          product.imageurl?.startsWith('http')
+            ? product.imageurl
+            : `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/uploads/${encodeURIComponent(product.imageurl)}`
+        }
+        alt={product.title}
         className="product-image"
         loading="lazy"
         onError={(e) => {
-          e.target.onerror = null; // stop infinite loop
-          e.target.src = "https://via.placeholder.com/200";
+          e.target.onerror = null;
+          e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23333'/%3E%3Ctext x='50%25' y='50%25' fill='%23888' text-anchor='middle' dy='.3em'%3ENo Image%3C/text%3E%3C/svg%3E";
         }}
       />
 
+
       <div className="product-body">
         <div>
-          <h6 className="product-title">{product.name}</h6>
+          <h6 className="product-title">{product.title}</h6>
           <p className="product-price">₹{product.price}</p>
         </div>
 

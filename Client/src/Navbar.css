@@ -160,3 +160,45 @@
   margin-left: 6px;
   box-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
 }
+/* ─── Mobile Fix ─── */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+  }
+
+  .navbar-nav {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-glass-btn,
+  .nav-action-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .user-greeting {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
+
+  .custom-navbar .navbar-brand {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-glass-btn,
+  .nav-action-btn {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
