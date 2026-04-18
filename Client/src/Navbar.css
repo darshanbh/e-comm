@@ -2,8 +2,8 @@
 
 /* The Main Glass Container */
 .custom-navbar {
-  background: rgba(10, 12, 16, 0.75); /* Deep dark transparent */
-  backdrop-filter: blur(16px);
+  background: rgba(15, 20, 28, 0.85); /* was rgba(10,12,16,0.75) */
+    backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);

@@ -559,3 +559,23 @@
     padding: 24px 16px !important;
   }
 }
+.homepage {
+  background: #131920; /* was #080b10 */
+}
+
+.hero {
+  background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(255,193,7,0.06) 0%, transparent 70%),
+              #131920; /* was #080b10 */
+}
+
+.why-choose-us {
+  background: linear-gradient(180deg, #131920 0%, #171f28 50%, #131920 100%); /* was #080b10 */
+}
+
+.stats-section {
+  background: #131920; /* was #080b10 */
+}
+
+.newsletter-section {
+  background: linear-gradient(135deg, #171f28 0%, #131920 100%); /* was #0d1117 */
+}

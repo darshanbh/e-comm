@@ -1,19 +1,12 @@
 /* Global Reset & Base Theme */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', 'Lexend Deca', 'Roboto', sans-serif;
-  background-color: #0d1117; /* Sleek dark tech background */
-  color: #e6edf3; /* Soft white text */
-  overflow-x: hidden;
-}
-body, html, #root {
-  background-color: #0d1117 !important;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
+  background-color: #131920; /* was #0d1117 */
+  color: #dde4ed;
 }
 
+body, html, #root {
+  background-color: #131920 !important; /* was #0d1117 */
+}
 #root {
   /* Removed max-width: 1280px and padding so Hero/Navbar can be full width */
   width: 100%;

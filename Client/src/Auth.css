@@ -11,64 +11,101 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #080b10;
+  background: linear-gradient(135deg, #424288 0%, #1f2e55 50%, #4d116b 100%);
   position: relative;
   overflow: hidden;
   padding: 40px 16px;
   font-family: 'DM Sans', sans-serif;
 }
 
-/* Animated background mesh */
-.auth-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,193,7,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,193,7,0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
-}
-
-/* Glowing orbs */
-.auth-container::after {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,193,7,0.07) 0%, transparent 60%);
-  top: -200px;
-  left: -200px;
-  pointer-events: none;
-  animation: authOrbDrift 15s ease-in-out infinite;
-}
-
-@keyframes authOrbDrift {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(80px, 100px); }
-}
-
-/* Second orb (pseudo on inner element via box-shadow trick) */
 .auth-card {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: 460px;
   padding: 50px 44px;
-  background: rgba(13, 17, 23, 0.95);
-  border: 1px solid rgba(255, 193, 7, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 24px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   box-shadow:
-    0 40px 80px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(255,255,255,0.03),
-    inset 0 1px 0 rgba(255,255,255,0.05);
+    0 30px 60px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(255,255,255,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.12);
   animation: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.auth-input {
+  width: 100%;
+  padding: 14px 18px;
+    color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 12px !important;
+  
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.auth-input::placeholder {
+  color: #a0b0c0;
+  font-size: 0.92rem;
+}
+
+.auth-input:focus {
+  border-color: rgba(255, 193, 7, 0.6) !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.12), 0 0 20px rgba(255,193,7,0.06) !important;
+  transform: translateY(-1px);
+}
+
+.auth-input:hover:not(:focus) {
+  border-color: rgba(255,255,255,0.35) !important;
+}
+
+.auth-input:-webkit-autofill,
+.auth-input:-webkit-autofill:hover,
+.auth-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 100px #2a3a4e inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.auth-title {
+  font-family: 'Syne', sans-serif !important;
+  font-size: 1.9rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  text-align: center;
+  margin-bottom: 8px !important;
+  margin-top: 20px !important;
+  letter-spacing: -0.5px;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 24px !important;
+  color: #b0c0d0;
+  font-size: 0.9rem;
+}
+
+.auth-card > a {
+  display: block;
+  text-align: center;
+  margin-top: 14px;
+  color: #b0c0d0;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.auth-card > a:hover {
+  color: #ffc107;
+}
 @keyframes cardReveal {
   from {
     opacity: 0;
@@ -160,7 +197,7 @@
 }
 
 .auth-input::placeholder {
-  color: #4a5568;
+color: #7a8fa3; 
   font-size: 0.92rem;
 }
 
